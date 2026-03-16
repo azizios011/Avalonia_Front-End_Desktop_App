@@ -1,9 +1,285 @@
-﻿<!-- Components/Sidebar.axaml -->
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="ERP_APP.Layout.Sidebar">
-    <StackPanel Background="#1a1a2e" Width="180">
-        <TextBlock Text="GlobalBank"/>
-        <!-- nav items... -->
+
+    <UserControl.Resources>
+        <!-- Colors from CSS -->
+        <SolidColorBrush x:Key="SidebarBg" Color="#181311"/>
+        <SolidColorBrush x:Key="SidebarBorder" Color="#352A27"/>
+        <SolidColorBrush x:Key="MenuLabelColor" Color="#CCBDB8"/>
+        <SolidColorBrush x:Key="MenuIconColor" Color="#937E76"/>
+        <SolidColorBrush x:Key="ActiveItemBg" Color="#41342F"/>
+        <SolidColorBrush x:Key="ActiveItemAccent" Color="#ED7E5A"/>
+        <SolidColorBrush x:Key="ActiveIndicator" Color="#DD6840"/>
+
+        <!-- Badge Gradient from CSS -->
+        <LinearGradientBrush x:Key="DangerGradient" StartPoint="50%,0%" EndPoint="50%,100%">
+            <GradientStop Offset="0.0123" Color="#ED5A5A"/>
+            <GradientStop Offset="0.9895" Color="#964040"/>
+        </LinearGradientBrush>
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+        <!-- Base Menu Item Style -->
+        <Style Selector="Button.NavBtn">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Name="PART_Border" 
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="8"
+                            Margin="0">
+                        <Grid ColumnDefinitions="24, 12, *, Auto" Margin="12,0">
+                            <!-- Icon Placeholder -->
+                            <ContentPresenter Grid.Column="0" Content="{TemplateBinding Tag}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <!-- Label -->
+                            <ContentPresenter Grid.Column="2" Content="{TemplateBinding Content}" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <!-- Feature Icon Style (the colored boxes) -->
+        <Style Selector="Border.FeatureIcon">
+            <Setter Property="Width" Value="36"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+
+        <Style Selector="Button.NavBtn TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource MenuLabelColor}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontFamily" Value="Inter"/>
+        </Style>
+    </UserControl.Styles>
+
+    <Border Width="324" Background="{StaticResource SidebarBg}" BorderBrush="{StaticResource SidebarBorder}" BorderThickness="0,0,1,0">
+        <Grid RowDefinitions="Auto, *, Auto">
+
+            <!-- 1. Header (Remains same) -->
+            <StackPanel Grid.Row="0">
+                <Border Padding="24,24,24,16">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <Border Width="38" Height="38" Background="#6405C3" CornerRadius="8">
+                                <TextBlock Text="G" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Spacing="4">
+                                <TextBlock Text="GlobalBank" Foreground="#FCF2EE" FontWeight="SemiBold" FontSize="16"/>
+                                <PathIcon Data="M7 10L12 15L17 10" Width="12" Foreground="{StaticResource MenuIconColor}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Height="1" Background="{StaticResource SidebarBorder}"/>
+            </StackPanel>
+
+            <!-- 2. Main Navigation (Adjusted to match CSS) -->
+            <ScrollViewer Grid.Row="1">
+                <!-- Padding: 24px and Gap: 4px from CSS -->
+                <StackPanel Spacing="4" Margin="24">
+                    
+                    <Button Classes="NavBtn" Content="Dashboard" Tag="🏠"/>
+                    <Button Classes="NavBtn" Content="Tasks" Tag="📋"/>
+                    
+                    <!-- Menu 3: Notes with Red Gradient Badge -->
+                    <Button Classes="NavBtn" Tag="📝">
+                        <Grid ColumnDefinitions="*, Auto">
+                            <TextBlock Text="Notes" VerticalAlignment="Center"/>
+                            <Border Grid.Column="1" Background="{StaticResource DangerGradient}" CornerRadius="1000" Padding="6,2" MinWidth="24" Height="24">
+                                <TextBlock Text="10" FontSize="14" Foreground="White" HorizontalAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                    </Button>
+
+                    <Button Classes="NavBtn" Content="Emails" Tag="✉️"/>
+
+                    <!-- Menu 5: Active Item (General Ledger) -->
+                    <Panel>
+                        <Border Background="{StaticResource ActiveItemBg}" Height="44" CornerRadius="8">
+                            <Grid ColumnDefinitions="24, 12, *">
+                                <TextBlock Grid.Column="0" Text="📊" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="12,0,0,0" Foreground="{StaticResource ActiveItemAccent}"/>
+                                <TextBlock Grid.Column="2" Text="General Ledger" VerticalAlignment="Center" Margin="12,0,0,0" Foreground="{StaticResource ActiveItemAccent}" FontWeight="Medium"/>
+                            </Grid>
+                        </Border>
+                        <!-- Indicator Line (2.22px width from CSS) -->
+                        <Border Width="2.22" Height="40" Background="{StaticResource ActiveIndicator}" HorizontalAlignment="Left" CornerRadius="0,13,13,0" Margin="-24,0,0,0"/>
+                    </Panel>
+
+                    <Button Classes="NavBtn" Content="Automations" Tag="⚙️"/>
+
+                    <!-- Menu 7: Section Header -->
+                    <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,16,0,8">
+                        <PathIcon Data="M7 10L12 15L17 10" Width="14" Foreground="{StaticResource MenuIconColor}"/>
+                        <TextBlock Text="Objects" Foreground="{StaticResource MenuLabelColor}" FontSize="14" FontWeight="Medium"/>
+                    </StackPanel>
+
+                    <!-- Feature Items (Menu 8-12) -->
+                    <Button Classes="NavBtn" Content="Companies" Height="56">
+                        <Button.Tag>
+                            <Border Classes="FeatureIcon" Background="#53423C">
+                                <TextBlock Text="🏢" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Button.Tag>
+                    </Button>
+
+                    <Button Classes="NavBtn" Content="People" Height="56">
+                        <Button.Tag>
+                            <Border Classes="FeatureIcon" Background="#5F2411">
+                                <TextBlock Text="👤" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Button.Tag>
+                    </Button>
+
+                    <Button Classes="NavBtn" Content="Deals" Height="56">
+                        <Button.Tag>
+                            <Border Classes="FeatureIcon" Background="#4E2222">
+                                <TextBlock Text="💰" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Button.Tag>
+                    </Button>
+                    
+                    <!-- Pinned Views (Menu 13) -->
+                    <Grid ColumnDefinitions="*, Auto" Margin="0,16,0,8">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <PathIcon Data="M7 10L12 15L17 10" Width="14" Foreground="{StaticResource MenuIconColor}"/>
+                            <TextBlock Text="Pinned Views" Foreground="{StaticResource MenuLabelColor}" FontSize="14" FontWeight="Medium"/>
+                        </StackPanel>
+                        <Border Grid.Column="1" Width="20" Height="20" Background="rgba(255,255,255,0.06)" CornerRadius="4">
+                            <PathIcon Data="M12 5v14M5 12h14" Width="12" Foreground="rgba(255,255,255,0.6)"/>
+                        </Border>
+                    </Grid>
+
+                    <Button Classes="NavBtn" Content="Sales" Tag="📈"/>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- 3. Bottom Content (Sync/Feature Card) -->
+            <Border Grid.Row="2" 
+                    Height="132" 
+                    Width="324" 
+                    Background="#231C1A" 
+                    Padding="24,20"> <!-- Translated from 20px 24px -->
+    
+                <!-- FeatureCard -->
+                <Border Background="#231C1A" 
+                        BorderBrush="#352A27" 
+                        BorderThickness="1" 
+                        CornerRadius="8" 
+                        Padding="20"
+                        BoxShadow="0 0 2 0 #1F000000, 0 2 4 0 #14000000">
+        
+                    <Grid ColumnDefinitions="40, 8, *">
+            
+                        <!-- Loading [Circular] -->
+                        <Panel Grid.Column="0" Width="40" Height="40">
+                            <!-- Background track -->
+                            <Ellipse Stroke="#352A27" StrokeThickness="3"/>
+                            <!-- Progress Arc (Representing the conic gradient progress) -->
+                            <Arc Stroke="#ED7E5A" 
+                                 StrokeThickness="3" 
+                                 StrokeLineCap="Round"
+                                 StartAngle="0" 
+                                 SweepAngle="280" 
+                                 Width="40" 
+                                 Height="40"/>
+                        </Panel>
+
+                        <!-- Content -->
+                        <StackPanel Grid.Column="2" VerticalAlignment="Center" Spacing="4">
+                            <!-- Label (Inter, 16px, Medium, #FBFAF9) -->
+                            <TextBlock Text="Syncing data..." 
+                                       Foreground="#FBFAF9" 
+                                       FontSize="16" 
+                                       FontWeight="Medium" 
+                                       FontFamily="Inter"/>
+                
+                            <!-- Description (Inter, 16px, Regular, #CCBDB8) -->
+                            <TextBlock Text="6060 processed" 
+                                       Foreground="#CCBDB8" 
+                                       FontSize="16" 
+                                       FontWeight="Normal" 
+                                       FontFamily="Inter"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Border>
+            
+            
+<!-- 3. Footer (Based on CSS Specifications) -->
+<StackPanel Grid.Row="2" Height="95" Width="324" VerticalAlignment="Bottom">
+    
+    <!-- Footer Container (Flex Column, Padding-Bottom: 24px, Gap: 24px) -->
+    <StackPanel Spacing="24" Margin="0,0,0,24">
+        
+        <!-- Divider (Height: 1px, Background: #473933) -->
+        <Border Height="1" Width="324" Background="#473933" HorizontalAlignment="Stretch"/>
+
+        <!-- Content Row (Flex Row, Padding: 0 24px, Gap: 12px) -->
+        <Border Padding="24,0">
+            <Grid ColumnDefinitions="36, 12, *, Auto, 12, Auto" Height="46">
+                
+                <!-- Avatar (36x36, Radius: 1000px) -->
+                <Border Grid.Column="0" Width="36" Height="36" CornerRadius="1000" ClipToBounds="True" Background="#473933">
+                    <!-- Replace with your actual image path -->
+                    <Image Source="avares://ERP_APP/Assets/avatar.jpg" Stretch="UniformToFill"/>
+                </Border>
+
+                <!-- Text Content (Flex Column, Gap: 2px) -->
+                <StackPanel Grid.Column="2" VerticalAlignment="Center" Spacing="2">
+                    <!-- Title (Inter, 16px, Medium, #FBFAF9) -->
+                    <TextBlock Text="Rudra Pratap" 
+                               Foreground="#FBFAF9" 
+                               FontSize="16" 
+                               FontWeight="Medium" 
+                               FontFamily="Inter"/>
+                    <!-- SubTitle (Inter, 14px, Regular, #CCBDB8) -->
+                    <TextBlock Text="rudra.pratap@brixui.com" 
+                               Foreground="#CCBDB8" 
+                               FontSize="14" 
+                               FontWeight="Normal" 
+                               FontFamily="Inter"/>
+                </StackPanel>
+
+                <!-- Badge (Bg: #451B0C, Radius: 8px) -->
+                <Border Grid.Column="3" 
+                        Background="#451B0C" 
+                        CornerRadius="8" 
+                        Padding="6,2" 
+                        Height="20" 
+                        VerticalAlignment="Center">
+                    <TextBlock Text="Pro" 
+                               Foreground="#ED7E5A" 
+                               FontSize="12" 
+                               FontWeight="Medium" 
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Border>
+
+                <!-- Right Icon Button (28x28, Bg: #231C1A, Border: #352A27) -->
+                <Button Grid.Column="5" 
+                        Width="28" 
+                        Height="28" 
+                        Padding="0"
+                        Background="#231C1A" 
+                        BorderBrush="#352A27" 
+                        BorderThickness="1" 
+                        CornerRadius="8">
+                    <PathIcon Data="M7 15l5-5 5 5" 
+                              Width="12" 
+                              Height="12" 
+                              Foreground="#937E76"/>
+                </Button>
+            </Grid>
+        </Border>
     </StackPanel>
+</StackPanel>
+        </Grid>
+    </Border>
 </UserControl>

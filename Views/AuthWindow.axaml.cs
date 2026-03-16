@@ -1,5 +1,7 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Interactivity;
+using ERP_APP;
 
 namespace ERP_APP.Views;
 
@@ -12,6 +14,9 @@ public partial class AuthWindow : Window
 
     private void OnLoginButtonClick(object sender, RoutedEventArgs e)
     {
-        ((App)App.Current).OnLoginSuccess();
+        if (Application.Current is App app)
+        {
+            app.OnLoginSuccess();
+        }
     }
 }

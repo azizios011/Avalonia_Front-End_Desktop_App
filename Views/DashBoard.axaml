@@ -3,21 +3,22 @@
         xmlns:vm="using:ERP_APP.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:layout="clr-namespace:ERP_APP.Layout"
+        xmlns:pages="clr-namespace:ERP_APP.Pages"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="ERP_APP.Views.DashBoard"
         x:DataType="vm:DashBoardViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="ERP_APP"
         WindowState="Maximized"
-        WindowStartupLocation="CenterScreen"
-        >
+        WindowStartupLocation="CenterScreen">
 
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:DashBoardViewModel/>
-    </Design.DataContext>
+    <Grid ColumnDefinitions="324, *">
+        <!-- Sidebar layout on the left -->
+        <layout:Sidebar Grid.Column="0"/>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <!-- Main layout on the right -->
+        <layout:Main Grid.Column="1"/>
+    </Grid>
 
 </Window>

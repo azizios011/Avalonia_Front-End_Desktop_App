@@ -1,8 +1,188 @@
-<!-- Pages/GeneralLedgerPage.axaml -->
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="ERP_APP.Pages.GeneralLedger">
-    <Grid>
-        <!-- toolbar, data table, etc -->
+
+    <UserControl.Resources>
+        <!-- Colors from CSS -->
+        <SolidColorBrush x:Key="FilterBarBg" Color="#2F2622"/>
+        <SolidColorBrush x:Key="ButtonBg" Color="#231C1A"/>
+        <SolidColorBrush x:Key="AccentOrange" Color="#ED7E5A"/>
+        <SolidColorBrush x:Key="BorderColor" Color="#473933"/>
+        <SolidColorBrush x:Key="TextPrimary" Color="#FBFAF9"/>
+        <SolidColorBrush x:Key="TextSecondary" Color="#CCBDB8"/>
+        
+        <LinearGradientBrush x:Key="AccentGradient" StartPoint="50%,0%" EndPoint="50%,100%">
+            <GradientStop Offset="0.0123" Color="#B64620"/>
+            <GradientStop Offset="0.9895" Color="#ED7E5A"/>
+        </LinearGradientBrush>
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+        <!-- Style for the Segmented Buttons -->
+        <Style Selector="Button.Segmented">
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="Background" Value="{StaticResource ButtonBg}"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+        
+        <Style Selector="Button.Active">
+            <Setter Property="BorderBrush" Value="{StaticResource AccentOrange}"/>
+            <Setter Property="Foreground" Value="{StaticResource AccentOrange}"/>
+        </Style>
+
+        <!-- Table Header Cell Style -->
+        <Style Selector="Border.TableHeader">
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="BorderThickness" Value="0,0,1,1"/>
+            <Setter Property="Padding" Value="20,8"/>
+        </Style>
+
+        <!-- Table Body Cell Style -->
+        <Style Selector="Border.TableCell">
+            <Setter Property="Height" Value="48"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="20,0"/>
+        </Style>
+    </UserControl.Styles>
+
+    <Grid RowDefinitions="76, *, 80">
+        
+        <!-- 1. Filter Bar (Frame 533) -->
+        <Border Grid.Row="0" Background="{StaticResource FilterBarBg}" Padding="32,16">
+            <Grid ColumnDefinitions="*, Auto">
+                
+                <!-- Left Content: Segmented Buttons & Filters -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="16">
+                    <Button Classes="Segmented Active" Content="Update"/>
+                    <Button Classes="Segmented" Content="4 Selected"/>
+                    <Button Classes="Segmented">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBlock Text="Filter"/>
+                            <Border Background="#2B1212" CornerRadius="1000" Padding="6,2">
+                                <TextBlock Text="4" Foreground="#ED5A5A" FontSize="12"/>
+                            </Border>
+                        </StackPanel>
+                    </Button>
+                    <Separator Width="1" Height="24" Background="{StaticResource BorderColor}" Margin="8,0"/>
+                    <Button Classes="Segmented" Content="Filters"/>
+                </StackPanel>
+
+                <!-- Right Content: Actions -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="16">
+                    <Button Background="{StaticResource AccentGradient}" Height="44" Padding="16,0" CornerRadius="8">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <PathIcon Data="M12 5v14M5 12h14" Width="14" Foreground="White"/>
+                            <TextBlock Text="Add New" Foreground="White" FontWeight="Medium"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="Segmented" Content="Import/Export"/>
+                    <Button Classes="Segmented" Content="View"/>
+                    <Button Classes="Segmented" Width="44">
+                        <PathIcon Data="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0 M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0 M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" Foreground="{StaticResource TextSecondary}"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- 2. Data Table (Frame 532) -->
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
+            <StackPanel Margin="32,0">
+                
+                <!-- Header Row -->
+                <Grid ColumnDefinitions="100, 202, 202, 196, 176, 155, 328">
+                    <Border Classes="TableHeader" Grid.Column="0"><CheckBox/></Border>
+                    <Border Classes="TableHeader" Grid.Column="1"><TextBlock Text="Client Name" Foreground="{StaticResource TextSecondary}"/></Border>
+                    <Border Classes="TableHeader" Grid.Column="2"><TextBlock Text="Account" Foreground="{StaticResource TextSecondary}"/></Border>
+                    <Border Classes="TableHeader" Grid.Column="3"><TextBlock Text="Debit" Foreground="{StaticResource TextSecondary}"/></Border>
+                    <Border Classes="TableHeader" Grid.Column="4"><TextBlock Text="Status" Foreground="{StaticResource TextSecondary}"/></Border>
+                    <Border Classes="TableHeader" Grid.Column="5"><TextBlock Text="Date" Foreground="{StaticResource TextSecondary}"/></Border>
+                    <Border Classes="TableHeader" Grid.Column="6"><TextBlock Text="Journal" Foreground="{StaticResource TextSecondary}"/></Border>
+                </Grid>
+
+                <!-- Data Row Example (Repeating) -->
+                <Grid ColumnDefinitions="100, 202, 202, 196, 176, 155, 328" Background="#2F2622">
+                    <Border Classes="TableCell" Grid.Column="0"><CheckBox/></Border>
+                    
+                    <Border Classes="TableCell" Grid.Column="1">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Border Width="28" Height="28" CornerRadius="14" Background="#473933" ClipToBounds="True">
+                                <Image Source="avares://ERP_APP/Assets/avatar.jpg" Stretch="UniformToFill"/>
+                            </Border>
+                            <TextBlock Text="Rudra Pratap" VerticalAlignment="Center" Foreground="{StaticResource TextPrimary}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Classes="TableCell" Grid.Column="2">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Border Width="24" Height="24" CornerRadius="12" Background="#6D1D03"/>
+                            <TextBlock Text="GlobalBank" VerticalAlignment="Center" Foreground="{StaticResource TextPrimary}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Classes="TableCell" Grid.Column="3">
+                        <TextBlock Text="$15,900,000" VerticalAlignment="Center" Foreground="{StaticResource TextPrimary}"/>
+                    </Border>
+
+                    <Border Classes="TableCell" Grid.Column="4">
+                        <Border Background="{StaticResource ButtonBg}" CornerRadius="4" Padding="6,2" HorizontalAlignment="Left">
+                             <StackPanel Orientation="Horizontal" Spacing="4">
+                                 <Ellipse Width="8" Height="8" Fill="#E3AE63"/>
+                                 <TextBlock Text="In Negotiation" Foreground="#F6D7AC" FontSize="12"/>
+                             </StackPanel>
+                        </Border>
+                    </Border>
+
+                    <Border Classes="TableCell" Grid.Column="5">
+                        <TextBlock Text="12/03/2047" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}"/>
+                    </Border>
+
+                    <Border Classes="TableCell" Grid.Column="6">
+                        <StackPanel Orientation="Horizontal" Spacing="4">
+                            <Border Background="#451B0C" CornerRadius="8" Padding="8,2">
+                                <TextBlock Text="B2B" Foreground="{StaticResource AccentOrange}" FontSize="12"/>
+                            </Border>
+                            <Border Background="#1D3525" CornerRadius="8" Padding="8,2">
+                                <TextBlock Text="Tech" Foreground="#7EC897" FontSize="12"/>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+                <!-- Repeat Grid above for more rows -->
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- 3. Pagination Footer -->
+        <Border Grid.Row="2" Padding="32,20" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,1,0,0">
+            <Grid ColumnDefinitions="Auto, *, Auto">
+                
+                <TextBlock Grid.Column="0" Text="1-20 of 300" Foreground="{StaticResource TextSecondary}" VerticalAlignment="Center"/>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8">
+                    <Button Classes="Segmented" Content="&lt;"/>
+                    <Border Width="40" Height="40" Background="#451B0C" CornerRadius="4">
+                        <TextBlock Text="1" Foreground="{StaticResource AccentOrange}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <Button Classes="Segmented" Content="2"/>
+                    <Button Classes="Segmented" Content="3"/>
+                    <Button Classes="Segmented" Content="&gt;"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                    <TextBlock Text="Rows per page:" Foreground="{StaticResource TextSecondary}" VerticalAlignment="Center"/>
+                    <Border BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="8" Padding="12,8">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBlock Text="20" Foreground="{StaticResource TextSecondary}"/>
+                            <PathIcon Data="M7 10l5 5 5-5" Width="10" Foreground="{StaticResource TextSecondary}"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Border>
+
     </Grid>
 </UserControl>

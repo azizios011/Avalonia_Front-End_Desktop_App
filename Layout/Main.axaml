@@ -1,0 +1,81 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ERP_APP.Layout.Main">
+    
+    <UserControl.Resources>
+        <!-- Colors from CSS -->
+        <SolidColorBrush x:Key="HeaderBg" Color="#231C1A"/>
+        <SolidColorBrush x:Key="BreadcrumbSecondary" Color="#937E76"/>
+        <SolidColorBrush x:Key="BreadcrumbPrimary" Color="#CCBDB8"/>
+        <SolidColorBrush x:Key="HeaderDivider" Color="#473933"/>
+    </UserControl.Resources>
+
+    <Grid RowDefinitions="92, *">
+        
+        <!-- 1. Page Header (Translated from CSS) -->
+        <Border Grid.Row="0" 
+                Background="{StaticResource HeaderBg}" 
+                BorderBrush="{StaticResource HeaderDivider}" 
+                BorderThickness="0,0,0,1"
+                Padding="32,24">
+            
+            <Grid ColumnDefinitions="*, Auto">
+                
+                <!-- ItemLeft: Breadcrumbs -->
+                <StackPanel Grid.Column="0" 
+                            Orientation="Horizontal" 
+                            Spacing="12" 
+                            VerticalAlignment="Center">
+                    
+                    <!-- First Page: Home + Dashboard -->
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <PathIcon Data="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" 
+                                  Width="18" Height="18" Foreground="{StaticResource BreadcrumbSecondary}"/>
+                        <TextBlock Text="Dashboard" 
+                                   Foreground="{StaticResource BreadcrumbSecondary}" 
+                                   FontSize="16" FontWeight="Medium" FontFamily="Inter"/>
+                    </StackPanel>
+
+                    <!-- Arrow Separator 1 -->
+                    <PathIcon Data="M9 5l7 7-7 7" Width="12" Foreground="{StaticResource BreadcrumbSecondary}" Opacity="0.64"/>
+
+                    <!-- Page 2: Database + Data -->
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <PathIcon Data="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" 
+                                  Width="18" Height="18" Foreground="{StaticResource BreadcrumbSecondary}"/>
+                        <TextBlock Text="Data" 
+                                   Foreground="{StaticResource BreadcrumbSecondary}" 
+                                   FontSize="16" FontWeight="Medium" FontFamily="Inter"/>
+                    </StackPanel>
+
+                    <!-- Arrow Separator 2 -->
+                    <PathIcon Data="M9 5l7 7-7 7" Width="12" Foreground="{StaticResource BreadcrumbSecondary}" Opacity="0.64"/>
+
+                    <!-- Last Page: CRM Link -->
+                    <StackPanel Orientation="Horizontal" Spacing="4">
+                        <TextBlock Text="Business Partner CRM" 
+                                   Foreground="{StaticResource BreadcrumbPrimary}" 
+                                   FontSize="16" FontWeight="Medium" FontFamily="Inter"/>
+                        <PathIcon Data="M19 9l-7 7-7-7" Width="14" Foreground="{StaticResource BreadcrumbPrimary}"/>
+                    </StackPanel>
+
+                </StackPanel>
+
+                <!-- NavItemRight: (Placeholder for Search/Actions) -->
+                <StackPanel Grid.Column="1" 
+                            Orientation="Horizontal" 
+                            Spacing="20" 
+                            VerticalAlignment="Center">
+                    <!-- Buttons/Icons from NavItemRight would go here -->
+                </StackPanel>
+
+            </Grid>
+        </Border>
+
+        <!-- 2. Main Page Content (Where Pages are rendered) -->
+        <ContentControl Grid.Row="1" Name="PageContentPresenter">
+            <!-- This is where GeneralLedger.axaml will be placed -->
+        </ContentControl>
+
+    </Grid>
+</UserControl>
