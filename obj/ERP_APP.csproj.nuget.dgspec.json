@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Develpoment\\Github\\Repositories\\Avalonia_Front-End_Desktop_App\\ERP_APP\\ERP_APP.csproj": {}
+    "D:\\Develpoment\\Github\\Repositories\\Avalonia_Front-End_Desktop_App\\ERP_APP.csproj": {}
   },
   "projects": {
-    "d:\\Develpoment\\Github\\Repositories\\Avalonia_Front-End_Desktop_App\\ERP_APP\\ERP_APP.csproj": {
+    "D:\\Develpoment\\Github\\Repositories\\Avalonia_Front-End_Desktop_App\\ERP_APP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Develpoment\\Github\\Repositories\\Avalonia_Front-End_Desktop_App\\ERP_APP\\ERP_APP.csproj",
+        "projectUniqueName": "D:\\Develpoment\\Github\\Repositories\\Avalonia_Front-End_Desktop_App\\ERP_APP.csproj",
         "projectName": "ERP_APP",
-        "projectPath": "d:\\Develpoment\\Github\\Repositories\\Avalonia_Front-End_Desktop_App\\ERP_APP\\ERP_APP.csproj",
+        "projectPath": "D:\\Develpoment\\Github\\Repositories\\Avalonia_Front-End_Desktop_App\\ERP_APP.csproj",
         "packagesPath": "D:\\Develpoment\\.nuget\\packages",
-        "outputPath": "d:\\Develpoment\\Github\\Repositories\\Avalonia_Front-End_Desktop_App\\ERP_APP\\obj\\",
+        "outputPath": "D:\\Develpoment\\Github\\Repositories\\Avalonia_Front-End_Desktop_App\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Develpoment\\Visual Studio\\2026\\Shared\\NuGetPackages"
