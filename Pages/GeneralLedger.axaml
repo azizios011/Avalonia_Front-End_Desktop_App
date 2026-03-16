@@ -1,0 +1,8 @@
+<!-- Pages/GeneralLedgerPage.axaml -->
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ERP_APP.Pages.GeneralLedger">
+    <Grid>
+        <!-- toolbar, data table, etc -->
+    </Grid>
+</UserControl>

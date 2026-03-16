@@ -1,0 +1,9 @@
+﻿<!-- Components/Sidebar.axaml -->
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ERP_APP.Layout.Sidebar">
+    <StackPanel Background="#1a1a2e" Width="180">
+        <TextBlock Text="GlobalBank"/>
+        <!-- nav items... -->
+    </StackPanel>
+</UserControl>

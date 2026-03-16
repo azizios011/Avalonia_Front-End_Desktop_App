@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace ERP_APP.Views;
 
-public partial class MainWindow : Window
+public partial class DashBoard : Window
 {
-    public MainWindow()
+    public DashBoard()
     {
         InitializeComponent();
     }

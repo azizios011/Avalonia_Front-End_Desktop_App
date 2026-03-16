@@ -1,0 +1,12 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="ERP_APP.Views.AuthWindow"
+        Width="1500"
+        Height="750"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen"
+        Title="Auth Page">
+    <Grid>
+        <Button Content="Login" HorizontalAlignment="Center" VerticalAlignment="Center" Click="OnLoginButtonClick"/>
+    </Grid>
+</Window>
