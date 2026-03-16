@@ -1,0 +1,80 @@
+# =============================================
+# .gitignore for Avalonia MVVM Desktop CRM
+# (with your custom npm + dotnet scripts)
+# =============================================
+
+# === NPM / Node ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json  # ← keep this if you want (recommended), remove this line if you prefer to commit it
+.pnpm-debug.log*
+
+# === .NET / Visual Studio / Avalonia ===
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.pdb
+*.log
+*.vs
+.vscode/settings.json   # only if you want to ignore VS Code settings (uncomment if needed)
+.vs/
+_ReSharper.*/
+*.DotSettings.user
+*.csproj.user
+
+# === Publish outputs (from your npm run publish:* scripts) ===
+**/publish/
+**/Publish/
+**/*.exe
+**/*.dll
+**/*.so
+**/*.dylib
+**/*.pdb   # already covered but explicit
+
+# === Avalonia / Skia specific temp files ===
+*.avalonia.cache
+*.skia.cache
+*.glcache
+
+# === dotnet watch / dev script temp ===
+*.watch
+.watch
+
+# === General junk ===
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# === Rider / JetBrains ===
+.idea/
+*.sln.iml
+
+# === Optional: If you ever use Figma MCP or Antigravity temp files ===
+.figma-mcp/
+antigravity-*
+
+# =============================================
+# How to use:
+# 1. Create a file named exactly: .gitignore
+#    (in the same folder as your .csproj and package.json)
+# 2. Paste everything above into it
+# 3. Save
+# 4. Run: git add .gitignore
+#    git commit -m "Add .gitignore for npm + dotnet junk"
+# =============================================
+
+# After this, your repo will stay clean even when you run:
+# npm run build
+# npm run publish:win
+# npm run dev
+# npm run add:datagrid
+# etc.
