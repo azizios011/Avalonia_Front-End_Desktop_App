@@ -1,6 +1,6 @@
 ﻿namespace ERP_APP.ViewModels;
 
-public partial class MainWindowViewModel : ViewModelBase
+public partial class DashBoardViewModel : ViewModelBase
 {
     public string Greeting { get; } = "Welcome to Avalonia!";
 }

@@ -7,7 +7,9 @@
         x:Class="ERP_APP.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="ERP_APP">
+        Title="ERP_APP"
+        Width="1920"
+        Height="969">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,

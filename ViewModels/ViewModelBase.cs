@@ -1,7 +1,7 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace ERP_APP.ViewModels;
 
-public abstract class ViewModelBase : ObservableObject
+public abstract class iewModelBase : ObservableObject
 {
 }
