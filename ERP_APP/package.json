@@ -1,0 +1,30 @@
+{
+  "name": "globalbank-crm-avalonia",
+  "version": "1.0.0",
+  "description": "NPM scripts for Avalonia desktop CRM — never type long dotnet commands again",
+  "scripts": {
+    "restore": "dotnet restore",
+    "build": "dotnet build",
+    "build:release": "dotnet build -c Release",
+    "clean": "dotnet clean",
+    "dev": "dotnet watch run",
+    "run": "dotnet run",
+    "test": "dotnet test",
+    "watch": "dotnet watch",
+
+    "publish:win": "dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true",
+    "publish:mac": "dotnet publish -c Release -r osx-x64 --self-contained true -p:PublishSingleFile=true",
+    "publish:linux": "dotnet publish -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true",
+    "publish:linux-arm": "dotnet publish -c Release -r linux-arm64 --self-contained true -p:PublishSingleFile=true",
+
+    "add:datagrid": "dotnet add package Avalonia.Controls.DataGrid",
+    "add:fluent": "dotnet add package Avalonia.Themes.Fluent",
+    "add:toolkit": "dotnet add package CommunityToolkit.Mvvm",
+    "add:reactiveui": "dotnet add package Avalonia.ReactiveUI",
+
+    "update": "dotnet restore && dotnet build",
+    "full-clean": "dotnet clean && dotnet restore"
+  },
+  "author": "You",
+  "license": "MIT"
+}
